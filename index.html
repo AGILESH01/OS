@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operating Systems Laboratory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #10141c;
+            color: white;
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 { color: #8bb4ff; }
+        .program {
+            background: #1b2330;
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 8px;
+        }
+        a { color: #8bb4ff; margin-right: 18px; }
+    </style>
+</head>
+<body>
+    <h1>Operating Systems Laboratory</h1>
+    <p>Operating Systems Lab Programs – Python and Linux</p>
+
+    <div id="programs"></div>
+
+    <script>
+        const files = [
+            ["Linux / Ubuntu Commands", "01_Lab1_Linux_Ubuntu_Commands.sh"],
+            ["FCFS CPU Scheduling", "02_Lab3a_FCFS_CPU_Scheduling.py"],
+            ["SJF Scheduling", "03_Lab3b_SJF_Non_Preemptive.py"],
+            ["Priority Scheduling", "04_Lab3c_Priority_Non_Preemptive.py"],
+            ["Round Robin Scheduling", "05_Lab3d_Round_Robin_Scheduling.py"],
+            ["Producer Consumer", "06_Lab4_Producer_Consumer_Semaphores.py"],
+            ["FIFO Page Replacement", "07_Lab7_FIFO_Page_Replacement.py"],
+            ["File System Simulator", "08_Lab8_File_System_Simulator.py"],
+            ["FCFS Disk Scheduling", "09_Lab9_FCFS_Disk_Scheduling.py"],
+            ["Linux System Commands", "10_Lab10_Linux_Ubuntu_System_Commands.sh"]
+        ];
+
+        document.getElementById("programs").innerHTML =
+            files.map((file, i) => `
+                <div class="program">
+                    <strong>${i + 1}. ${file[0]}</strong><br><br>
+                    <a href="${file[1]}" target="_blank">View Code</a>
+                    <a href="${file[1]}" download>Download</a>
+                </div>
+            `).join("");
+    </script>
+</body>
+</html>
