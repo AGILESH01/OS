@@ -48,7 +48,7 @@
             files.map((file, i) => `
                 <div class="program">
                     <strong>${i + 1}. ${file[0]}</strong><br><br>
-                    <a href="${file[1]}" target="_blank">View Code</a>
+                    <a href="view.html?file=${encodeURIComponent(file[1])}">View Code</a>
                     <a href="${file[1]}" download>Download</a>
                 </div>
             `).join("");
