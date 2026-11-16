@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program Source Code</title>
+<style>
+body {
+    margin: 0;
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: Arial, sans-serif;
+}
+header {
+    padding: 20px 5%;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+}
+a { color: #79aaff; text-decoration: none; }
+main { max-width: 1100px; margin: 35px auto; padding: 0 20px; }
+h1 { font-size: 25px; }
+pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 24px;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.65;
+    font-size: 14px;
+}
+code { font-family: "SFMono-Regular", Consolas, monospace; }
+button {
+    background: #2458a6;
+    color: white;
+    border: 0;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <a href="/">← Back to OS Laboratory</a>
+</header>
+
+<main>
+    <h1 id="title">Loading program...</h1>
+    <button onclick="copyCode()">Copy Code</button>
+    <pre><code id="source">Loading...</code></pre>
+</main>
+
+<script>
+const allowedFiles = [
+"01_Lab1_Linux_Ubuntu_Commands.sh",
+"02_Lab3a_FCFS_CPU_Scheduling.py",
+"03_Lab3b_SJF_Non_Preemptive.py",
+"04_Lab3c_Priority_Non_Preemptive.py",
+"05_Lab3d_Round_Robin_Scheduling.py",
+"06_Lab4_Producer_Consumer_Semaphores.py",
+"07_Lab7_FIFO_Page_Replacement.py",
+"08_Lab8_File_System_Simulator.py",
+"09_Lab9_FCFS_Disk_Scheduling.py",
+"10_Lab10_Linux_Ubuntu_System_Commands.sh"
+];
+
+const file = new URLSearchParams(location.search).get("file");
+
+async function loadCode() {
+    if (!allowedFiles.includes(file)) {
+        document.getElementById("title").textContent = "Invalid program";
+        document.getElementById("source").textContent = "The requested file is not available.";
+        return;
+    }
+
+    document.getElementById("title").textContent = file;
+
+    try {
+        const response = await fetch("./" + file);
+
+        if (!response.ok) throw new Error("File not found");
+
+        const code = await response.text();
+        document.getElementById("source").textContent = code;
+        window.programCode = code;
+    } catch (error) {
+        document.getElementById("source").textContent =
+            "Unable to load the program. Please check the file path.";
+    }
+}
+
+function copyCode() {
+    if (window.programCode) {
+        navigator.clipboard.writeText(window.programCode);
+    }
+}
+
+loadCode();
+</script>
+
+</body>
+</html>
